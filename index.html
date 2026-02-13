@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Tete ❤️</title>
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', cursive;
+  background: black;
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: auto; /* allow vertical scroll if needed */
+}
+
+/* STAR INTRO */
+#stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* MAIN SECTION */
+#main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5vw 5vw 10vw 5vw;
+  background: linear-gradient(135deg, #ff6a88, #ff99ac);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* PHOTO */
+.photo {
+  width: 70%;
+  max-width: 280px;
+  border-radius: 10%;
+  margin: 5vw 0;
+  box-shadow: 0 0 5vw rgba(0,0,0,0.5);
+  display: block;
+}
+
+/* HEARTS */
+.heart {
+  position: fixed;
+  bottom: -5vh;
+  animation: up 6s linear infinite;
+  pointer-events: none;
+}
+@keyframes up { to { transform: translateY(-110vh); opacity:0; } }
+
+/* BUTTONS */
+#buttons {
+  display: none;
+  margin-top: 3vw;
+}
+button {
+  padding: 3vw 6vw;
+  font-size: 4vw;
+  border: none;
+  border-radius: 10vw;
+  margin: 3vw 2vw;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+#yes { background: #ff2d55; color: white; }
+#no { background: white; color: black; position: relative; }
+
+/* RING */
+#ring {
+  font-size: 18vw;
+  max-height: 35vw;
+  position: absolute;
+  top: -25vw;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  animation: drop 3s forwards;
+}
+@keyframes drop { to { top: 20vw; } }
+
+/* FINAL MESSAGE */
+#final {
+  display: none;
+  margin-top: 35vw;
+  font-size: 4vw;
+  line-height: 1.5;
+  padding: 0 5vw;
+  max-width: 90%;
+  word-wrap: break-word;
+}
+
+/* COUNTDOWN */
+#countdown {
+  font-size: 10vw;
+  margin-top: 5vw;
+}
+
+/* FIREWORKS */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+/* TEXT */
+p { font-size: 4vw; line-height: 1.5; margin: 3vw 0; }
+h1 { font-size: 8vw; margin: 3vw 0 1vw 0; }
+h2 { font-size: 6vw; margin: 2vw 0; }
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<div id="main">
+  <h1>Jenny Vanlalsangi Hatzaw ❤️</h1>
+  <h2>My Tete…</h2>
+
+  <img src="photo.jpg" class="photo">
+
+  <div>
+    <p>18 years and still running…<br>
+    From an Instagram text<br>
+    to that first noon we met.<br>
+    we walked for a bit…<br>
+    and I remember thinking<br>
+    how pretty you looked.</p>
+
+    <p>Since that day,<br>
+    you became my constant,<br>
+    my peace,<br>
+    my home.</p>
+
+    <p>Every year with you has been my favourite chapter.<br>
+    Every laugh, every moment, every memory... has only made me love you more.</p>
+
+    <p><b>If I had to choose again, in every lifetime, in every world, it would still be you.<br>
+    You make my heart calm, my days brighter, and my life feel right.<br>
+    No matter where life takes us, I just want you beside me.</b></p>
+  </div>
+
+  <h2>Will u be my valentine again, darling? ❤️</h2>
+  <div id="countdown">5</div>
+
+  <div id="buttons">
+    <button id="yes">YES ❤️</button>
+    <button id="no">No 🙈</button>
+  </div>
+</div>
+
+<div id="ring">💍</div>
+<div id="final">
+  For my most beautiful women,<br>
+  a Fel pen² of the world ❤️
+</div>
+
+<audio id="music">
+  <source src="perfect.mp3">
+</audio>
+
+<canvas id="fire"></canvas>
+
+<script>
+/* STAR TEXT ANIMATION */
+let canvas = document.getElementById("stars");
+let ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let text = "Jenny Vanlalsangi Hatzaw";
+let i = 0;
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="white";
+  ctx.font = Math.floor(window.innerWidth/20) + "px cursive";
+  ctx.fillText(text.substring(0,i), window.innerWidth*0.05, window.innerHeight*0.15);
+  i++;
+  if(i<=text.length){ setTimeout(draw,120); }
+}
+draw();
+
+/* COLORFUL HEARTS */
+function hearts(){
+  setInterval(()=>{
+    let h = document.createElement("div");
+    h.className = "heart";
+    h.innerText = "❤️";
+    h.style.left = Math.random()*100 + "vw";
+    h.style.fontSize = (5 + Math.random()*8) + "vw";
+    let colors = ["#ff2d55","#ff9a3d","#fffc3d","#3dff7f","#3dc6ff","#a03dff","#ff3da3"];
+    h.style.color = colors[Math.floor(Math.random() * colors.length)];
+    document.body.appendChild(h);
+    setTimeout(()=> h.remove(), 6000);
+  }, 300);
+}
+hearts();
+
+/* COUNTDOWN */
+let countdown = document.getElementById("countdown");
+let buttons = document.getElementById("buttons");
+let time=5;
+let timer = setInterval(()=>{
+  time--;
+  if(time<=0){
+    clearInterval(timer);
+    countdown.style.display="none";
+    buttons.style.display="block";
+  } else { countdown.innerText=time; }
+},1000);
+
+/* NO BUTTON ESCAPE */
+let no = document.getElementById("no");
+no.addEventListener("mouseover",()=>{
+  no.style.position="absolute";
+  no.style.left=Math.random()*70+"vw";
+  no.style.top=Math.random()*70+"vh";
+});
+
+/* YES CLICK */
+document.getElementById("yes").onclick=function(){
+  let audio = document.getElementById("music");
+  audio.volume=0;
+  audio.play();
+  fireworks();
+  let vol=0;
+  let fadeIn=setInterval(()=>{
+    vol+=0.02;
+    if(vol>=1){ vol=1; clearInterval(fadeIn); }
+    audio.volume=vol;
+  },40);
+  setTimeout(()=>{
+    document.getElementById("ring").style.display="block";
+    document.getElementById("final").style.display="block";
+  },2000);
+};
+
+/* FIREWORKS */
+let f = document.getElementById("fire");
+let fx = f.getContext("2d");
+f.width = window.innerWidth;
+f.height = window.innerHeight;
+
+function fireworks(){
+  for(let i=0;i<25;i++){setTimeout(explode,i*200);}
+}
+function explode(){
+  let x=Math.random()*f.width;
+  let y=Math.random()*f.height/2;
+  let colors = ["#ff2d55","#ff9a3d","#fffc3d","#3dff7f","#3dc6ff","#a03dff","#ff3da3"];
+  for(let i=0;i<60;i++){
+    let a=Math.random()*2*Math.PI;
+    let s=Math.random()*0.012*f.width;
+    draw2(x,y,Math.cos(a)*s,Math.sin(a)*s, colors[Math.floor(Math.random()*colors.length)]);
+  }
+}
+function draw2(x,y,dx,dy,color){
+  let life=30;
+  function anim(){
+    fx.fillStyle=color;
+    fx.fillRect(x,y,3,3);
+    x+=dx; y+=dy; life--;
+    if(life>0) requestAnimationFrame(anim);
+  }
+  anim();
+}
+</script>
+</body>
+</html>
